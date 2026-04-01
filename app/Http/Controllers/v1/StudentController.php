@@ -17,8 +17,8 @@ class StudentController extends Controller
     public function GetStudent(Request $request): JsonResponse
     {
         return $this->success([
-            'ad' => 'Alp',
-            'soyad' => 'Ermiş'
+            'name' => 'Alp',
+            'lastname' => 'Ermiş'
         ]);
     }
 

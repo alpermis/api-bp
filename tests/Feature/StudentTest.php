@@ -15,7 +15,14 @@ class StudentTest extends TestCase
             'X-Authenticated-UserId' => '12345'
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'name' => 'Alp',
+                    'lastname' => 'Ermiş'
+                ]
+            ]);
     }
 
     /**
