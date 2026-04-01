@@ -1,0 +1,215 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Boilerplate API Project",
+    "description": "A clean, standard-compliant boilerplate API project for new developments.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/api-student/",
+      "description": "Base Server"
+    }
+  ],
+  "paths": {
+    "/v1/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Check the health status of the API.",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/information": {
+      "get": {
+        "summary": "Get General Information",
+        "description": "Returns static test information and description.",
+        "operationId": "getInformation",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/student": {
+      "get": {
+        "summary": "Get Student Information",
+        "description": "Returns the name and surname of the authenticated student.",
+        "operationId": "getStudent",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authenticated-UserId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The authenticated student ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Student ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/student/name": {
+      "post": {
+        "summary": "Set Student Name",
+        "description": "Sets the student name and surname (mock action).",
+        "operationId": "setStudentName",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authenticated-UserId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The authenticated student ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ad": {
+                    "type": "string"
+                  },
+                  "soyad": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "ad",
+                  "soyad"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Authenticated-UserId"
+      }
+    },
+    "schemas": {
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "nullable": true
+          },
+          "error": {
+            "type": "object",
+            "nullable": true,
+            "example": null
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "data": {
+            "type": "object",
+            "nullable": true,
+            "example": null
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "nullable": true
+              },
+              "message": {
+                "type": "string"
+              },
+              "details": {
+                "type": "object",
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
