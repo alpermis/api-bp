@@ -23,21 +23,36 @@ class StudentController extends Controller
     }
 
     /**
-     * Set student name (mock action).
+     * Set student name and lastname (mock action).
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function SetStudentName(Request $request): JsonResponse
+    public function SetStudent(Request $request): JsonResponse
     {
-        $ad = $request->input('ad');
-        $soyad = $request->input('soyad');
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error(
+                'Validation failed',
+                'VALIDATION_ERROR',
+                400,
+                $validator->errors()->toArray()
+            );
+        }
+
+        $name = $request->input('name');
+        $lastname = $request->input('lastname');
 
         return $this->success([
-            'message' => 'Student name updated successfully (mock)',
+            'status' => 'OK',
+            'message' => 'Student information updated successfully',
             'data' => [
-                'ad' => $ad,
-                'soyad' => $soyad
+                'name' => $name,
+                'lastname' => $lastname
             ]
         ]);
     }

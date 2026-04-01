@@ -19,8 +19,8 @@
             Route::get('/information', [StudentController::class, 'GetInformation']);
 
             Route::middleware([CheckAuthenticatedUser::class])->group(function () {
-                Route::get('/student', [StudentController::class, 'GetStudent']);
-                Route::post('/student/name', [StudentController::class, 'SetStudentName']);
+                Route::get('/student', [StudentController::class, 'GetStudent'])->name('v1.student.get');
+                Route::post('/student/name', [StudentController::class, 'SetStudent'])->name('v1.student.set');
             });
         })
     ;

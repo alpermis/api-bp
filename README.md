@@ -37,7 +37,7 @@ Bu proje, yeni API geliştirmeleri için temel teşkil eden, sadeleştirilmiş v
 - **Headers:** 
   - `X-Authenticated-UserId`: `12345` (Test için herhangi bir ID)
 
-### 3. Set Student Name (Auth Gerekli)
+### 3. Set Student Information (Auth Gerekli)
 - **Method:** POST
 - **URL:** `{{base_url}}/v1/student/name`
 - **Headers:** 
@@ -46,8 +46,8 @@ Bu proje, yeni API geliştirmeleri için temel teşkil eden, sadeleştirilmiş v
 - **Body (JSON):**
   ```json
   {
-    "ad": "Alp",
-    "soyad": "Ermiş"
+    "name": "Alp",
+    "lastname": "Ermiş"
   }
   ```
 
