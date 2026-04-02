@@ -14,7 +14,7 @@ class StudentController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function GetStudent(Request $request): JsonResponse
+    public function getStudent(Request $request): JsonResponse
     {
         return $this->success([
             'name' => 'Alp',
@@ -28,7 +28,7 @@ class StudentController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function SetStudent(Request $request): JsonResponse
+    public function setStudent(Request $request): JsonResponse
     {
         $validator = \Validator::make($request->all(), [
             'name' => 'required|string',
@@ -62,11 +62,11 @@ class StudentController extends Controller
      *
      * @return JsonResponse
      */
-    public function GetInformation(): JsonResponse
+    public function getInformation(): JsonResponse
     {
         return $this->success([
-            'information' => 'Test bilgisi',
-            'description' => 'Test açıklaması'
+            'information' => 'Test information',
+            'description' => 'Test description'
         ]);
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 class ApiResponse
 {
     /**
-     * Başarılı response
+     * Success response
      *
      * @param mixed $data
      * @param int $status
@@ -22,7 +22,7 @@ class ApiResponse
     }
 
     /**
-     * Hatalı response
+     * Error response
      *
      * @param string $message
      * @param string|null $code
