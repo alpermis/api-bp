@@ -1,427 +1,427 @@
 {
-  "openapi": "3.0.3",
-  "info": {
-    "title": "Boilerplate API Project",
-    "description": "A clean, standard-compliant boilerplate API project for new developments.",
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "/api-student/",
-      "description": "Base Server"
-    }
-  ],
-  "paths": {
-    "/v1/health": {
-      "get": {
-        "summary": "Health Check",
-        "description": "Check the health status of the API.",
-        "operationId": "healthCheck",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                },
-                "example": {
-                  "success": true,
-                  "data": {
-                    "status": "ok",
-                    "version": "1.0.0",
-                    "app": "Laravel",
-                    "time": "2024-03-20T10:00:00Z"
-                  },
-                  "error": null
-                }
-              }
-            }
-          }
-        }
-      }
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Boilerplate API Project",
+        "description": "A clean, standard-compliant boilerplate API project for new developments.",
+        "version": "1.0.0"
     },
-    "/v1/information": {
-      "get": {
-        "summary": "Get General Information",
-        "description": "Returns static test information and description.",
-        "operationId": "getInformation",
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                },
-                "example": {
-                  "success": true,
-                  "data": {
-                    "information": "Test information",
-                    "description": "Test description"
-                  },
-                  "error": null
-                }
-              }
-            }
-          }
+    "servers": [
+        {
+            "url": "https://stars83.bilkent.edu.tr/api-bp",
+            "description": "Base Server"
         }
-      }
-    },
-    "/v1/student": {
-      "get": {
-        "summary": "Get Student Information",
-        "description": "Returns the name and surname of the authenticated student.",
-        "operationId": "getStudent",
-        "security": [
-          {
-            "apiKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "X-Authenticated-UserId",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "description": "The authenticated student ID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "name": {
-                              "type": "string"
-                            },
-                            "lastname": {
-                              "type": "string"
+    ],
+    "paths": {
+        "/v1/health": {
+            "get": {
+                "summary": "Health Check",
+                "description": "Check the health status of the API.",
+                "operationId": "healthCheck",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponse"
+                                },
+                                "example": {
+                                    "success": true,
+                                    "data": {
+                                        "status": "ok",
+                                        "version": "1.0.0",
+                                        "app": "Laravel",
+                                        "time": "2024-03-20T10:00:00Z"
+                                    },
+                                    "error": null
+                                }
                             }
-                          }
                         }
-                      }
                     }
-                  ]
-                },
-                "example": {
-                  "success": true,
-                  "data": {
-                    "name": "Alp",
-                    "lastname": "Ermiş"
-                  },
-                  "error": null
                 }
-              }
             }
-          },
-          "400": {
-            "description": "Invalid Student ID",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+        },
+        "/v1/information": {
+            "get": {
+                "summary": "Get General Information",
+                "description": "Returns static test information and description.",
+                "operationId": "getInformation",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiResponse"
+                                },
+                                "example": {
+                                    "success": true,
+                                    "data": {
+                                        "information": "Test information",
+                                        "description": "Test description"
+                                    },
+                                    "error": null
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
-        }
-      },
-      "put": {
-        "summary": "Set Student Information",
-        "description": "Updates the student name and lastname using student ID from header.",
-        "operationId": "setStudent",
-        "security": [
-          {
-            "apiKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "X-Authenticated-UserId",
-            "schema": {
-              "type": "string"
+        },
+        "/v1/student": {
+            "get": {
+                "summary": "Get Student Information",
+                "description": "Returns the name and surname of the authenticated student.",
+                "operationId": "getStudent",
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Authenticated-UserId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "The authenticated student ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ApiResponse"
+                                        },
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string"
+                                                        },
+                                                        "lastname": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "example": {
+                                    "success": true,
+                                    "data": {
+                                        "name": "Alp",
+                                        "lastname": "Ermiş"
+                                    },
+                                    "error": null
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid Student ID",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
             },
-            "required": true,
-            "description": "The authenticated student ID"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
+            "put": {
+                "summary": "Set Student Information",
+                "description": "Updates the student name and lastname using student ID from header.",
+                "operationId": "setStudent",
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Authenticated-UserId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "The authenticated student ID"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "lastname"
+                                ]
+                            },
+                            "example": {
+                                "name": "John",
+                                "lastname": "Doe"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ApiResponse"
+                                        },
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "status": {
+                                                            "type": "string",
+                                                            "example": "OK"
+                                                        },
+                                                        "message": {
+                                                            "type": "string"
+                                                        },
+                                                        "data": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "lastname": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "example": {
+                                    "success": true,
+                                    "data": {
+                                        "status": "OK",
+                                        "message": "Student information updated successfully",
+                                        "data": {
+                                            "name": "John",
+                                            "lastname": "Doe"
+                                        }
+                                    },
+                                    "error": null
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation failed or Student ID missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Create Student",
+                "description": "Creates a new student record (example).",
+                "operationId": "createStudent",
+                "security": [
+                    {
+                        "apiKey": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "X-Authenticated-UserId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "The authenticated student ID"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "lastname": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "lastname"
+                                ]
+                            },
+                            "example": {
+                                "name": "Jane",
+                                "lastname": "Smith"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Student created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ApiResponse"
+                                        },
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "status": {
+                                                            "type": "string",
+                                                            "example": "CREATED"
+                                                        },
+                                                        "message": {
+                                                            "type": "string"
+                                                        },
+                                                        "data": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "lastname": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                },
+                                "example": {
+                                    "success": true,
+                                    "data": {
+                                        "status": "CREATED",
+                                        "message": "Student created successfully",
+                                        "data": {
+                                            "name": "Jane",
+                                            "lastname": "Smith"
+                                        }
+                                    },
+                                    "error": null
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation failed or Student ID missing",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiKey": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "X-Authenticated-UserId"
+            }
+        },
+        "schemas": {
+            "ApiResponse": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "lastname": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "lastname"
-                ]
-              },
-              "example": {
-                "name": "John",
-                "lastname": "Doe"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
+                    "success": {
+                        "type": "boolean",
+                        "example": true
                     },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "status": {
-                              "type": "string",
-                              "example": "OK"
-                            },
-                            "message": {
-                              "type": "string"
-                            },
-                            "data": {
-                              "type": "object",
-                              "properties": {
-                                "name": {
-                                  "type": "string"
-                                },
-                                "lastname": {
-                                  "type": "string"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                },
-                "example": {
-                  "success": true,
-                  "data": {
-                    "status": "OK",
-                    "message": "Student information updated successfully",
                     "data": {
-                      "name": "John",
-                      "lastname": "Doe"
+                        "type": "object",
+                        "nullable": true
+                    },
+                    "error": {
+                        "type": "object",
+                        "nullable": true,
+                        "example": null
                     }
-                  },
-                  "error": null
                 }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation failed or Student ID missing",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Create Student",
-        "description": "Creates a new student record (example).",
-        "operationId": "createStudent",
-        "security": [
-          {
-            "apiKey": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "header",
-            "name": "X-Authenticated-UserId",
-            "schema": {
-              "type": "string"
             },
-            "required": true,
-            "description": "The authenticated student ID"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
+            "ErrorResponse": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "lastname": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "name",
-                  "lastname"
-                ]
-              },
-              "example": {
-                "name": "Jane",
-                "lastname": "Smith"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Student created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
+                    "success": {
+                        "type": "boolean",
+                        "example": false
                     },
-                    {
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "status": {
-                              "type": "string",
-                              "example": "CREATED"
+                    "data": {
+                        "type": "object",
+                        "nullable": true,
+                        "example": null
+                    },
+                    "error": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "nullable": true
                             },
                             "message": {
-                              "type": "string"
+                                "type": "string"
                             },
-                            "data": {
-                              "type": "object",
-                              "properties": {
-                                "name": {
-                                  "type": "string"
-                                },
-                                "lastname": {
-                                  "type": "string"
-                                }
-                              }
+                            "details": {
+                                "type": "object",
+                                "nullable": true
                             }
-                          }
                         }
-                      }
                     }
-                  ]
-                },
-                "example": {
-                  "success": true,
-                  "data": {
-                    "status": "CREATED",
-                    "message": "Student created successfully",
-                    "data": {
-                      "name": "Jane",
-                      "lastname": "Smith"
-                    }
-                  },
-                  "error": null
                 }
-              }
             }
-          },
-          "400": {
-            "description": "Validation failed or Student ID missing",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
         }
-      }
     }
-  },
-  "components": {
-    "securitySchemes": {
-      "apiKey": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "X-Authenticated-UserId"
-      }
-    },
-    "schemas": {
-      "ApiResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": true
-          },
-          "data": {
-            "type": "object",
-            "nullable": true
-          },
-          "error": {
-            "type": "object",
-            "nullable": true,
-            "example": null
-          }
-        }
-      },
-      "ErrorResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": false
-          },
-          "data": {
-            "type": "object",
-            "nullable": true,
-            "example": null
-          },
-          "error": {
-            "type": "object",
-            "properties": {
-              "code": {
-                "type": "string",
-                "nullable": true
-              },
-              "message": {
-                "type": "string"
-              },
-              "details": {
-                "type": "object",
-                "nullable": true
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }
