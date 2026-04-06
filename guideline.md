@@ -72,7 +72,7 @@ Backend tarafında:
 X-Authenticated-UserId
 
 - Middleware:
-CheckAuthenticatedUser
+auth.user (CheckAuthenticatedUser)
 
 Kurallar:
 
@@ -145,7 +145,8 @@ Kurallar:
 ### Controller Method
 
 getStudent
-setStudent
+setStudent (PUT)
+createStudent (POST)
 getInformation
 
 Kurallar:

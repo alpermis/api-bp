@@ -20,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'throttle' => ThrottleRequests::class,
+            'auth.user' => \App\Http\Middleware\CheckAuthenticatedUser::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

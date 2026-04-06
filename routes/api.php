@@ -18,9 +18,10 @@
             Route::get('/health', [HealthController::class, 'index']);
             Route::get('/information', [StudentController::class, 'getInformation']);
 
-            Route::middleware([CheckAuthenticatedUser::class])->group(function () {
+            Route::middleware(['auth.user'])->group(function () {
                 Route::get('/student', [StudentController::class, 'getStudent'])->name('v1.student.get');
-                Route::post('/student/name', [StudentController::class, 'setStudent'])->name('v1.student.set');
+                Route::put('/student', [StudentController::class, 'setStudent'])->name('v1.student.set');
+                Route::post('/student', [StudentController::class, 'createStudent'])->name('v1.student.create');
             });
         })
     ;

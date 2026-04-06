@@ -30,7 +30,7 @@ class StudentTest extends TestCase
      */
     public function test_set_student_success(): void
     {
-        $response = $this->postJson('/v1/student/name', [
+        $response = $this->putJson('/v1/student', [
             'name' => 'John',
             'lastname' => 'Doe'
         ], [
@@ -53,7 +53,7 @@ class StudentTest extends TestCase
      */
     public function test_set_student_validation_fails_missing_name(): void
     {
-        $response = $this->postJson('/v1/student/name', [
+        $response = $this->putJson('/v1/student', [
             'lastname' => 'Doe'
         ], [
             'X-Authenticated-UserId' => '12345'
@@ -70,7 +70,7 @@ class StudentTest extends TestCase
      */
     public function test_set_student_validation_fails_missing_lastname(): void
     {
-        $response = $this->postJson('/v1/student/name', [
+        $response = $this->putJson('/v1/student', [
             'name' => 'John'
         ], [
             'X-Authenticated-UserId' => '12345'
@@ -79,6 +79,29 @@ class StudentTest extends TestCase
         $response->assertStatus(400)
             ->assertJson([
                 'success' => false,
+            ]);
+    }
+
+    /**
+     * Test creating a new student record.
+     */
+    public function test_create_student_success(): void
+    {
+        $response = $this->postJson('/v1/student', [
+            'name' => 'Jane',
+            'lastname' => 'Smith'
+        ], [
+            'X-Authenticated-UserId' => '12345'
+        ]);
+
+        $response->assertStatus(201)
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'status' => 'CREATED',
+                    'name' => 'Jane',
+                    'lastname' => 'Smith'
+                ]
             ]);
     }
 }

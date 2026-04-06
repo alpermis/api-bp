@@ -23,7 +23,7 @@ class StudentController extends Controller
     }
 
     /**
-     * Set student name and lastname (mock action).
+     * Set student name and lastname (PUT - Update existing student).
      *
      * @param Request $request
      * @return JsonResponse
@@ -55,6 +55,41 @@ class StudentController extends Controller
                 'lastname' => $lastname
             ]
         ]);
+    }
+
+    /**
+     * Create a new student (POST - Create example).
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function createStudent(Request $request): JsonResponse
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|string',
+            'lastname' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->error(
+                'Validation failed',
+                'VALIDATION_ERROR',
+                400,
+                $validator->errors()->toArray()
+            );
+        }
+
+        $name = $request->input('name');
+        $lastname = $request->input('lastname');
+
+        return $this->success([
+            'status' => 'CREATED',
+            'message' => 'Student created successfully',
+            'data' => [
+                'name' => $name,
+                'lastname' => $lastname
+            ]
+        ], 201);
     }
 
     /**

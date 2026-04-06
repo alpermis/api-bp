@@ -17,7 +17,8 @@ Bu proje, yeni API geliştirmeleri için temel teşkil eden, sadeleştirilmiş v
 
 ### Yetkili Uçlar (X-Authenticated-UserId Header'ı Gerektirir)
 - `GET /v1/student`: Kimliği doğrulanmış öğrenci bilgilerini (Alp Ermiş) döner.
-- `POST /v1/student/name`: Öğrenci adı güncelleme simülasyonu.
+- `PUT /v1/student`: Öğrenci bilgilerini güncelleme simülasyonu.
+- `POST /v1/student`: Yeni öğrenci oluşturma simülasyonu.
 
 ## Test Etme (Bruno Kullanımı)
 
@@ -38,8 +39,8 @@ Bu proje, yeni API geliştirmeleri için temel teşkil eden, sadeleştirilmiş v
   - `X-Authenticated-UserId`: `12345` (Test için herhangi bir ID)
 
 ### 3. Set Student Information (Auth Gerekli)
-- **Method:** POST
-- **URL:** `{{base_url}}/v1/student/name`
+- **Method:** PUT
+- **URL:** `{{base_url}}/v1/student`
 - **Headers:** 
   - `X-Authenticated-UserId`: `12345`
   - `Content-Type`: `application/json`
@@ -48,6 +49,20 @@ Bu proje, yeni API geliştirmeleri için temel teşkil eden, sadeleştirilmiş v
   {
     "name": "Alp",
     "lastname": "Ermiş"
+  }
+  ```
+
+### 4. Create Student (Auth Gerekli)
+- **Method:** POST
+- **URL:** `{{base_url}}/v1/student`
+- **Headers:** 
+  - `X-Authenticated-UserId`: `12345`
+  - `Content-Type`: `application/json`
+- **Body (JSON):**
+  ```json
+  {
+    "name": "Jane",
+    "lastname": "Smith"
   }
   ```
 

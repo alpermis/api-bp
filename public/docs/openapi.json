@@ -57,8 +57,8 @@
                 "example": {
                   "success": true,
                   "data": {
-                    "information": "Test bilgisi",
-                    "description": "Test açıklaması"
+                    "information": "Test information",
+                    "description": "Test description"
                   },
                   "error": null
                 }
@@ -96,14 +96,20 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/ApiResponse" },
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
                     {
                       "properties": {
                         "data": {
                           "type": "object",
                           "properties": {
-                            "name": { "type": "string" },
-                            "lastname": { "type": "string" }
+                            "name": {
+                              "type": "string"
+                            },
+                            "lastname": {
+                              "type": "string"
+                            }
                           }
                         }
                       }
@@ -132,12 +138,10 @@
             }
           }
         }
-      }
-    },
-    "/v1/student/name": {
-      "post": {
+      },
+      "put": {
         "summary": "Set Student Information",
-        "description": "Sets the student name and lastname (mock action).",
+        "description": "Updates the student name and lastname using student ID from header.",
         "operationId": "setStudent",
         "security": [
           {
@@ -173,6 +177,10 @@
                   "name",
                   "lastname"
                 ]
+              },
+              "example": {
+                "name": "John",
+                "lastname": "Doe"
               }
             }
           }
@@ -184,19 +192,30 @@
               "application/json": {
                 "schema": {
                   "allOf": [
-                    { "$ref": "#/components/schemas/ApiResponse" },
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
                     {
                       "properties": {
                         "data": {
                           "type": "object",
                           "properties": {
-                            "status": { "type": "string", "example": "OK" },
-                            "message": { "type": "string" },
+                            "status": {
+                              "type": "string",
+                              "example": "OK"
+                            },
+                            "message": {
+                              "type": "string"
+                            },
                             "data": {
                               "type": "object",
                               "properties": {
-                                "name": { "type": "string" },
-                                "lastname": { "type": "string" }
+                                "name": {
+                                  "type": "string"
+                                },
+                                "lastname": {
+                                  "type": "string"
+                                }
                               }
                             }
                           }
@@ -213,6 +232,118 @@
                     "data": {
                       "name": "John",
                       "lastname": "Doe"
+                    }
+                  },
+                  "error": null
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation failed or Student ID missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Student",
+        "description": "Creates a new student record (example).",
+        "operationId": "createStudent",
+        "security": [
+          {
+            "apiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Authenticated-UserId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "The authenticated student ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "lastname": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "lastname"
+                ]
+              },
+              "example": {
+                "name": "Jane",
+                "lastname": "Smith"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Student created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "example": "CREATED"
+                            },
+                            "message": {
+                              "type": "string"
+                            },
+                            "data": {
+                              "type": "object",
+                              "properties": {
+                                "name": {
+                                  "type": "string"
+                                },
+                                "lastname": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "data": {
+                    "status": "CREATED",
+                    "message": "Student created successfully",
+                    "data": {
+                      "name": "Jane",
+                      "lastname": "Smith"
                     }
                   },
                   "error": null
